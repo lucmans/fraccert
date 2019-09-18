@@ -1,0 +1,217 @@
+{ 
+    Cond suppression
+    Memcheck:Cond
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Cond suppression
+    Memcheck:Cond
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Cond suppression
+    Memcheck:Cond
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Leak suppression
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Leak suppression
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Leak suppression
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Value1 suppression
+    Memcheck:Value1
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Value1 suppression
+    Memcheck:Value1
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Value1 suppression
+    Memcheck:Value1
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Value2 suppression
+    Memcheck:Value2
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Value2 suppression
+    Memcheck:Value2
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Value2 suppression
+    Memcheck:Value2
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Value4 suppression
+    Memcheck:Value4
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Value4 suppression
+    Memcheck:Value4
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Value4 suppression
+    Memcheck:Value4
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Value8 suppression
+    Memcheck:Value8
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Value8 suppression
+    Memcheck:Value8
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Value8 suppression
+    Memcheck:Value8
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Value16 suppression
+    Memcheck:Value16
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Value16 suppression
+    Memcheck:Value16
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Value16 suppression
+    Memcheck:Value16
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Addr1 suppression
+    Memcheck:Addr1
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Addr1 suppression
+    Memcheck:Addr1
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Addr1 suppression
+    Memcheck:Addr1
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Addr2 suppression
+    Memcheck:Addr2
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Addr2 suppression
+    Memcheck:Addr2
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Addr2 suppression
+    Memcheck:Addr2
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Addr4 suppression
+    Memcheck:Addr4
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Addr4 suppression
+    Memcheck:Addr4
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Addr4 suppression
+    Memcheck:Addr4
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Addr8 suppression
+    Memcheck:Addr8
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Addr8 suppression
+    Memcheck:Addr8
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Addr8 suppression
+    Memcheck:Addr8
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+{ 
+    Addr16 suppression
+    Memcheck:Addr16
+    ...
+    obj:/usr/lib/dri/i965_dri.so
+}
+{ 
+    Addr16 suppression
+    Memcheck:Addr16
+    ...
+    obj:/usr/lib/libSDL2-2.0.so.0.9.0
+}
+{ 
+    Addr16 suppression
+    Memcheck:Addr16
+    ...
+    obj:/usr/lib/libX11.so.6.3.0
+}
+
