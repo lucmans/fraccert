@@ -388,7 +388,7 @@ SDL_Texture* Graphics::calculateJulia(const Julia* const fractal, const HighPrec
     SDL_Rect symFrom, symTo;
     unsigned int yMin = 0;
     unsigned int yMax = res.h;
-    bool sym = lpDom.iMin < 0 && lpDom.iMax > 0 && lpDom.rMin < 0 && lpDom.rMax > 0 && symmetry;
+    bool sym = false; //lpDom.iMin < 0 && lpDom.iMax > 0 && lpDom.rMin < 0 && lpDom.rMax > 0 && symmetry;
     if(sym) {
     //     //yAlignPixel(iMin, iMax);
 
