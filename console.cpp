@@ -40,6 +40,7 @@ void split(const std::string& s, Strings& tokens, const char delim) {
     std::stringstream ss(s);
     std::string token;
 
+    tokens.clear();
     while(std::getline(ss, token, delim)) {
         tokens.push_back(std::move(token));  // move() is faster in this case
     }
@@ -58,8 +59,9 @@ int inputThread(void* const c) {
         std::cout << "$ ";
 
         std::getline(std::cin, read);
+        if(std::cin.eof())
+            console->parseExit();
 
-        tokens.clear();
         split(read, tokens, ' ');
 
         if(tokens.size() == 0)
