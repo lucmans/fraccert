@@ -1,10 +1,10 @@
 For 1.0:
-	- Make backend conform to interface described in the thesis
+    - Make backend conform to interface described in the thesis
 
 General:
-	- Make orbit persistent + ability to clear
-	- Click and drag to select new domain (view)
-	- GMP float toggle
-	- Only perform shape checking for shapes which are in screen
-	- Add text UI to main window
+    - Make orbit persistent + ability to clear
+    - Click and drag to select new domain (view)
+    - GMP float toggle
+    - Only perform shape checking for shapes which are in screen
+    - Add text UI to main window
     - Better multiple window structure/support in code
