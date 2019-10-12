@@ -1,5 +1,6 @@
 For 1.0:
     - Make backend conform to interface described in the thesis
+    - Make color wheel circular (every 256 or 512 n)
 
 General:
     - Make orbit persistent + ability to clear
