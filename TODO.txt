@@ -7,3 +7,4 @@ General:
 	- GMP float toggle
 	- Only perform shape checking for shapes which are in screen
 	- Add text UI to main window
+    - Better multiple window structure/support in code
