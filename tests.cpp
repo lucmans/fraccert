@@ -860,6 +860,8 @@ void allSpeeds() {
 }
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wfloat-equal"
 void doublePrec() {
     int n;
 
@@ -891,6 +893,7 @@ void doublePrec() {
     //     d += c;
     // printf("%.15g\n", d); // prints 8.99999999999996
 }
+#pragma GCC diagnostic pop
 
 void gmpBruteforceSpeed(int prec = 0) {
     mpf_set_default_prec(prec);
