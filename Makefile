@@ -36,10 +36,12 @@ $(BIN): $(FRONTEND) $(FRACCERTLIB)  #$(addprefix $(LIBNAME)/, $(BACKEND))
 
 # Front-end
 main.o: main.cpp tests.cpp locations.h iocontroller.h
+	$(CXX) $(CXXFLAGS) $(WARNINGS) $(OPTIMIZATION) -c $<
+
 iocontroller.o: iocontroller.cpp iocontroller.h program.h console.h
 console.o: console.cpp console.h locations.h program.h
 program.o: program.cpp program.h graphics.h
-%.o: %.cpp %.h  # All other files in FRONTEND
+%.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) $(WARNINGS) $(OPTIMIZATION) -c $<
 
 
@@ -86,7 +88,7 @@ lines:
 
 
 todo:
-	grep -n TODO *.cpp *.h
+	grep -n TODO *.cpp *.h || echo -e "Nothing left to do!\n"
 
 
 clean:
