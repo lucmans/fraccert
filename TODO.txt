@@ -1,6 +1,10 @@
 For 1.0:
-    - Make backend conform to interface described in the thesis
+    - Make back-end conform to interface described in the thesis
     - Make color wheel circular (every 256 or 512 n)
+
+For 2.0:
+    - Implement perturbation theory, which can estimate orbit based on other orbit using series approximation
+    - Rendering pipeline: Define list of functions in the front-end which perform the different rendering steps. This includes deciding which pixels to render (brute force/border trace/series approximation), how individual pixels are calculated (escape time algorithm/distance estimation) and coloring. Maybe parallelization of different pipeline stages (however parallelization by dividing screen over threads may be better).
 
 General:
     - Make orbit persistent + ability to clear
