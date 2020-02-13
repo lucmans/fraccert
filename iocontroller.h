@@ -8,6 +8,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <cstdint>
+
 
 class IOController {
     public:

@@ -1,11 +1,8 @@
 
 #include "program.h"
+
 #include "select_scale.h"
-#include "fracfast/types.h"
 
-#include <gmp.h>
-
-#include <mutex>
 #include <iostream>
 #include <iomanip>
 

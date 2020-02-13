@@ -1,10 +1,6 @@
 
 #include "select_scale.h"
 
-#include "fracfast/types.h"
-
-#include <SDL2/SDL.h>
-
 
 void smallestARcenter(SDL_Rect& zoomTo, SDL_Rect& selectionBox, const Selection* const selection, const Resolution& res) {
     selectionBox = {(int)selection->xLast, (int)selection->yLast,

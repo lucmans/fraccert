@@ -1,5 +1,8 @@
 
 #include "iocontroller.h"
+#include "console.h"
+#include "program.h"
+#include "graphics.h"
 
 #include <SDL2/SDL.h>
 

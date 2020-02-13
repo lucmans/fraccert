@@ -2,9 +2,7 @@
 #include "graphics.h"
 
 #include "select_scale.h"
-#include "fracfast/fractals.h"
 #include "fracfast/shapes.h"
-#include "fracfast/types.h"
 
 #include <iostream>
 #include <cstdlib>
