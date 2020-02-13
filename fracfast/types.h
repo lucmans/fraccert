@@ -33,4 +33,10 @@ struct Range {
 };
 
 
+struct Selection {
+    unsigned int xInit, yInit;
+    unsigned int xLast, yLast;
+};
+
+
 #endif  // TYPES_H

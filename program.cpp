@@ -1,5 +1,6 @@
 
 #include "program.h"
+#include "select_scale.h"
 #include "fracfast/types.h"
 
 #include <gmp.h>
@@ -24,8 +25,8 @@ Program::Program(Graphics* const g, const unsigned int w, const unsigned int h, 
     g->setSymmetry(symmetry);
 
     fractal = new Mandelbrot();
-
     rendering = false;
+    selection = nullptr;
 
     resetView();
 }
@@ -193,7 +194,7 @@ void Program::resize(const Resolution& newRes) {
     setResolution(newRes.w, newRes.h);
     // graphics->forceRedraw();  // Prevents extend drawing, because otherwise old resolution would be used when pixel recycling
 
-    // Alias xRatio as iCenter and yRatio as iHeight to save initializion extra mpf_t members
+    // Alias xRatio as iCenter and yRatio as iHeight to save initializing extra mpf_t members
     mpf_t& iCenter = xRatio; mpf_t& iHeight = yRatio;
 
     // const double iCenter = (iMax + iMin) / 2.0;
@@ -305,6 +306,8 @@ void Program::scaleXY(const int scaleDirection, const unsigned int x, const unsi
     mpf_sub(dImag, domain.iMax, domain.iMin);
 
     if(scaleDirection == 1) {
+        mpf_set_d(scaleFactor, SCALEFACTOR);
+
         //dReal = (SCALEFACTOR * dReal) - dReal;
         mpf_mul(t, scaleFactor, dReal);
         mpf_sub(dReal, t, dReal);
@@ -314,17 +317,15 @@ void Program::scaleXY(const int scaleDirection, const unsigned int x, const unsi
         mpf_sub(dImag, t, dImag);
     }
     else {
-        // Alias xRatio as t2 to save initializion extra mpf_t member
-        mpf_t& t2 = xRatio;
+        // scaleFactor = 1 / SCALEFACTOR, because zooming the other direction
+        mpf_set_d(scaleFactor, 1 / SCALEFACTOR);
 
         // dReal = ((1 / SCALEFACTOR) * dReal) - dReal;
-        mpf_ui_div(t2, 1, scaleFactor);
-        mpf_mul(t, t2, dReal);
+        mpf_mul(t, scaleFactor, dReal);
         mpf_sub(dReal, t, dReal);
 
         // dImag = ((1 / SCALEFACTOR) * dImag) - dImag;
-        // t2 is still set correctly
-        mpf_mul(t, t2, dImag);
+        mpf_mul(t, scaleFactor, dImag);
         mpf_sub(dImag, t, dImag);
     }
 
@@ -612,5 +613,85 @@ void Program::orbit(const unsigned int x, const unsigned int y) {
 
     graphics->drawOrbit(fractal, c, {mpf_get_d(domain.rMin), mpf_get_d(domain.rMax), mpf_get_d(domain.iMin), mpf_get_d(domain.iMax)}, res);
     
+    unlock(renderingMutex);
+}
+
+
+void Program::beginRegionSelect(const unsigned int x, const unsigned int y) {
+    lock(renderingMutex);
+
+    if(selection != nullptr)
+        delete selection;
+
+    selection = new Selection();
+    selection->xInit = selection->xLast = x;
+    selection->yInit = selection->yLast = y;
+
+    graphics->select(selection, res);
+
+    unlock(renderingMutex);
+}
+
+void Program::updateRegionSelect(const unsigned int x, const unsigned int y) {
+    if(selection == nullptr)
+        return;
+
+    lock(renderingMutex);
+
+    selection->xLast = x;
+    selection->yLast = y;
+
+    graphics->select(selection, res);
+
+    unlock(renderingMutex);
+}
+
+void Program::setSelectedRegion() {
+    if(selection == nullptr)
+        return;
+
+    lock(renderingMutex);
+
+    SDL_Rect zoomTo, selectionBox;
+    largestARtopleft(zoomTo, selectionBox, selection, res);
+
+    // const double pixelSize = (domain.rMax - domain.rMin) / (double)(res.w);
+    mpf_t& pixelSize = scaleFactor;  // Alias to reuse gmp floats
+    mpf_sub(pixelSize, domain.rMax, domain.rMin);
+    mpf_div_ui(pixelSize, pixelSize, res.w);
+
+    // Update rMax
+    mpf_mul_ui(dReal, pixelSize, zoomTo.x + zoomTo.w);
+    mpf_add(domain.rMax, domain.rMin, dReal);
+
+    // Update iMin
+    mpf_mul_ui(dImag, pixelSize, zoomTo.y + zoomTo.h);
+    mpf_sub(domain.iMin, domain.iMax, dImag);
+
+    // Update rMin
+    mpf_mul_ui(dReal, pixelSize, zoomTo.x);
+    mpf_add(domain.rMin, domain.rMin, dReal);
+
+    // Update iMax
+    mpf_mul_ui(dImag, pixelSize, zoomTo.y);
+    mpf_sub(domain.iMax, domain.iMax, dImag);
+
+    tick();
+
+    delete selection;
+    selection = nullptr;
+
+    unlock(renderingMutex);
+}
+
+void Program::cancelSelect() {
+    if(selection == nullptr)
+        return
+
+    lock(renderingMutex);
+
+    delete selection;
+    selection = nullptr;
+
     unlock(renderingMutex);
 }

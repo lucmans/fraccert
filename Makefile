@@ -16,7 +16,7 @@ CORES = 8
 
 # Front-end building and linking info
 BIN = fraccert
-FRONTEND = graphics.o program.o iocontroller.o console.o locations.o main.o
+FRONTEND = select_scale.o graphics.o program.o iocontroller.o console.o locations.o main.o
 
 # Back-end building and linking info
 LIBNAME = fracfast
@@ -40,7 +40,8 @@ main.o: main.cpp tests.cpp locations.h iocontroller.h
 
 iocontroller.o: iocontroller.cpp iocontroller.h program.h console.h
 console.o: console.cpp console.h locations.h program.h
-program.o: program.cpp program.h graphics.h
+program.o: program.cpp program.h graphics.h select_scale.h
+graphics.o: graphics.cpp graphics.h select_scale.h
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) $(WARNINGS) $(OPTIMIZATION) -c $<
 

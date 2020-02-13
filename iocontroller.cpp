@@ -30,7 +30,7 @@ int eventFilter(void* userdata, SDL_Event* const e) {
         SDL_FlushEvent(SDL_MOUSEMOTION);
     }
 
-    // Dragging right mouse buttong without ctrl held down
+    // Dragging right mouse button without ctrl held down
     if(e->type == SDL_MOUSEMOTION && e->motion.state == SDL_BUTTON_RMASK && !((IOController*)userdata)->ctrlHeldDown) {
         SDL_FlushEvent(SDL_MOUSEWHEEL);
         SDL_FlushEvent(SDL_KEYDOWN);
@@ -132,7 +132,8 @@ void IOController::mainWindowWindowEvent(const SDL_WindowEvent& eWindow, bool& q
 void IOController::mainWindowClick(const SDL_MouseButtonEvent& eClick) {
     switch(eClick.button) {
         case SDL_BUTTON_LEFT:
-            program->click(eClick.x, eClick.y);
+            //program->click(eClick.x, eClick.y);
+            program->beginRegionSelect(eClick.x, eClick.y);
             break;
 
         case SDL_BUTTON_RIGHT:
@@ -141,12 +142,16 @@ void IOController::mainWindowClick(const SDL_MouseButtonEvent& eClick) {
     }
 }
 
-// void IOController::mainWindowUnclick(const SDL_MouseButtonEvent& eClick) {
-// }
+void IOController::mainWindowUnclick(const SDL_MouseButtonEvent& eClick) {
+    switch(eClick.button) {
+        case SDL_BUTTON_LEFT:
+            program->setSelectedRegion();
+    }
+}
 
 void IOController::mainWindowMouseMotion(const SDL_MouseMotionEvent& eMotion) {
     if(eMotion.state == SDL_BUTTON_LMASK && !program->isRendering()) {
-        program->click(eMotion.x, eMotion.y, false);
+        program->updateRegionSelect(eMotion.x, eMotion.y);
     }
     if(eMotion.state == SDL_BUTTON_RMASK && !program->isRendering()) {
         program->orbit(eMotion.x, eMotion.y);
@@ -274,8 +279,8 @@ void IOController::mainLoop() {
                 break;
 
             case SDL_MOUSEBUTTONUP:
-                // if(e.button.windowID == mainWindowID)
-                //     mainWindowUnclick(e.button);
+                if(e.button.windowID == mainWindowID)
+                    mainWindowUnclick(e.button);
                 // else if(e.button.windowID == juliaWindowID)
                 //     juliaWindowUnclick(e.button);
                 break;

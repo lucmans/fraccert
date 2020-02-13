@@ -93,6 +93,11 @@ class Program {
 
         void orbit(const unsigned int x, const unsigned int y);
 
+        void beginRegionSelect(const unsigned int x, const unsigned int y);
+        void updateRegionSelect(const unsigned int x, const unsigned int y);
+        void setSelectedRegion();
+        void cancelSelect();
+
 
 
     private:
@@ -116,9 +121,12 @@ class Program {
 
         HighPrecDomain domain;
         
-        // These are members, because they are expensive to initialize.
+        // These are members, because they are expensive to initialize every function invocation.
         // Now, the constructor can initialize them once and every member function can use them with little overhead.
+        // They can always be used by other functions as well (i.e. through aliasing)
         mpf_t xRatio, yRatio, dReal, dImag, t, scaleFactor;
+
+        Selection* selection;
         
 
         // Scale at mouse position (x, y)

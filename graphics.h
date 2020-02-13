@@ -96,6 +96,8 @@ class Graphics {
 
         // void smoothScale(unsigned int x, unsigned int y);
 
+        void select(const Selection* const selection, const Resolution& res);
+
 
 
     private:

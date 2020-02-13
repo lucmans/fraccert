@@ -1,6 +1,7 @@
 
 #include "graphics.h"
 
+#include "select_scale.h"
 #include "fracfast/fractals.h"
 #include "fracfast/shapes.h"
 #include "fracfast/types.h"
@@ -494,4 +495,71 @@ void Graphics::refresh() {
 
 void Graphics::drawCurrentC(const double xRatio, const double yRatio, const Resolution& res) {
     drawClick(xRatio * res.w, yRatio * res.h);
+}
+
+
+void largestARcenter(SDL_Rect& zoomTo, SDL_Rect& selectionBox, const Selection* const selection, const Resolution& res) {
+    selectionBox = {(int)selection->xLast, (int)selection->yLast,
+                    abs((int)(selection->xLast - selection->xInit) * 2),
+                    abs((int)(selection->yLast - selection->yInit) * 2)};
+    if(selection->xLast > selection->xInit)
+        selectionBox.x = selection->xLast - selectionBox.w;
+    if(selection->yLast > selection->yInit)
+        selectionBox.y = selection->yLast - selectionBox.h;
+    zoomTo = selectionBox;
+
+    const double screenAR = (double)res.w / (double)res.h,
+                 selectAR = (double)selectionBox.w / (double)selectionBox.h;
+    if(screenAR > selectAR) {  // If screen is wider than selection
+        // Increase width to fit AR
+        zoomTo.w = zoomTo.h * screenAR;
+        zoomTo.x = selection->xInit - (zoomTo.w / 2);
+    }
+    else {  // If selection is wider than screen
+        // Increase height to fit AR
+        zoomTo.h = zoomTo.w / screenAR;
+        zoomTo.y = selection->yInit - (zoomTo.h / 2);
+    }
+}
+
+
+void dot(int x, int y, SDL_Renderer* renderer) {
+    SDL_SetRenderDrawColor(renderer, 0xff, 0x00, 0x00, 0xff);
+    SDL_Rect dot = {x - 3, y - 3, 7, 7};
+    SDL_RenderFillRect(renderer, &dot);
+
+    SDL_SetRenderDrawColor(renderer, 0x00, 0xff, 0xff, 0xff);
+    dot = {x - 1, y - 1, 3, 3};
+    SDL_RenderFillRect(renderer, &dot);
+
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
+    dot = {x, y, 1, 1};
+    SDL_RenderFillRect(renderer, &dot);
+}
+
+void Graphics::select(const Selection* const selection, const Resolution& res) {
+    if(prev.pixels == NULL)
+        return;
+    SDL_RenderCopy(renderer, prev.pixels, NULL, NULL);
+
+    SDL_Rect zoomTo;  // Largest box with same aspect ratio as screen fitting the selection
+    SDL_Rect selectionBox;
+    // largestARcenter(zoomTo, selectionBox, selection, res);
+    // smallestARcenter(zoomTo, selectionBox, selection, res);
+    largestARtopleft(zoomTo, selectionBox, selection, res);
+    
+    // SDL_SetRenderDrawColor(renderer, 0x77, 0x77, 0x77, 0xff);
+    // SDL_RenderDrawRect(renderer, &selectionBox);
+    
+    SDL_SetRenderDrawColor(renderer, 0xee, 0xee, 0xee, 0xff);
+    SDL_RenderDrawRect(renderer, &zoomTo);
+
+    // Dot in the middle if ARcenter zooming
+    // dot(selection->xInit, selection->yInit, renderer);
+
+    // Dot in corners of ARtopleft zooming
+    dot(selection->xInit, selection->yInit, renderer);
+    dot(selection->xLast, selection->yLast, renderer);
+
+    blit();
 }

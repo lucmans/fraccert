@@ -18,7 +18,7 @@ class IOController {
         void mainWindowScrollEvent(const SDL_MouseWheelEvent& eScroll);
         void mainWindowWindowEvent(const SDL_WindowEvent& eWindow, bool& quit);
         void mainWindowClick(const SDL_MouseButtonEvent& eClick);
-        // void mainWindowUnclick(const SDL_MouseButtonEvent& eClick);
+        void mainWindowUnclick(const SDL_MouseButtonEvent& eClick);
         void mainWindowMouseMotion(const SDL_MouseMotionEvent& eMotion);
 
         void juliaWindowKeyEvent(const SDL_Keycode& sym, bool& quit);
