@@ -80,7 +80,7 @@ void parseArgs(unsigned int argc, char* argv[], unsigned int& width, unsigned in
     }
 }
 
-#include "fracfast/fractal.h"
+
 int main(int argc, char* argv[]) {
     // Delfault settings
     unsigned int width = DEFAULTWIDTH;
@@ -107,6 +107,8 @@ int main(int argc, char* argv[]) {
 
     program->redraw();  // Initial draw
     ioController->mainLoop();
+
+    std::cout << std::endl;
 
     delete juliaGraphics;
     delete juliaWindow;
