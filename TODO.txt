@@ -1,6 +1,6 @@
 For 1.0:
     - Make back-end conform to interface described in the thesis
-    - Make color wheel circular (every 256 or 512 n)
+    - Make color wheel circular every 256 or 512 n. Or even better, make difference in color always delta at minimum.
 
 For 2.0:
     - Implement perturbation theory, which can estimate orbit based on other orbit using series approximation
@@ -8,8 +8,9 @@ For 2.0:
 
 General:
     - Make orbit persistent + ability to clear
-    - Click and drag to select new domain (view)
     - GMP float toggle
     - Only perform shape checking for shapes which are in screen
     - Add text UI to main window
     - Better multiple window structure/support in code
+    - Graphics pipeline: Always set screen to last generated fractal, then render overlays etc.
+    - Translate by n pixels to prevent translation rendering glitch
