@@ -647,6 +647,14 @@ void Program::setSelectedRegion() {
     if(selection == nullptr)
         return;
 
+    if(abs((int)(selection->xInit - selection->xLast)) < 10
+       || abs((int)(selection->yInit - selection->yLast)) < 10) {
+        delete selection;
+        selection = nullptr;
+        tick();
+        return;
+    }
+
     lock(renderingMutex);
 
     SDL_Rect zoomTo, selectionBox;
