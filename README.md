@@ -9,7 +9,7 @@ On Arch:
 `sudo pacman -S sdl2 gmp`
 
 On Ubuntu:  
-`sudo apt install libsdl2-devgmp libgmp-dev`
+`sudo apt install libsdl2-dev libgmp-dev`
 
 
 # Build and run instructions
