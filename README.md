@@ -1,7 +1,23 @@
 # fraccert
 This project is not yet finished! If the fracfast API is conform to the thesis/documentation, version 1.0 will be released.
 
-Fractal library (fracfast) and viewer (fraccert).
+# Requirements
+sdl2 and gmp.  
+A C++ with OpenMP support (e.g. g++ >9)
+
+On Arch:  
+`sudo pacman -S sdl2 gmp`
+
+On Ubuntu:  
+`sudo apt install libsdl2-devgmp libgmp-dev`
+
+
+# Build and run instructions
+Run from the command line in the root directory of the project:  
+`make`  
+`./fraccert`
+
+This project consists of two parts, a fractal library (fracfast) and a viewer (fraccert).
 
 See the thesis folder for information and documentation about this project.
 
