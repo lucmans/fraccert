@@ -10,7 +10,7 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -s  #-fsanitize=address
 WARNINGS = -Wall -Wextra -Wfloat-equal
-OPTIMIZATION = -O3 -march=native -mtune=native # -mfma -mavx2 -ftree-vectorize -ffast-math
+OPTIMIZATION = -O3 #-march=native -mtune=native # -mfma -mavx2 -ftree-vectorize -ffast-math
 LIBS = -lSDL2 -lgmp -fopenmp
 CORES = 8
 
