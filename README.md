@@ -3,7 +3,7 @@ This project is not yet finished! If the fracfast API is conform to the thesis/d
 
 # Requirements
 sdl2 and gmp.  
-A C++ with OpenMP support (e.g. g++ >9)
+A C++ compiler with OpenMP support (e.g. g++ >9)
 
 On Arch:  
 `sudo pacman -S sdl2 gmp`
